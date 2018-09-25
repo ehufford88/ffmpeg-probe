@@ -1,13 +1,12 @@
 'use strict'
 
-import path from 'path';
-
+const path = require('path');
 const execa = require('execa');
 
 module.exports = async (input, opts = []) => {
   var ffprobeExec = 'ffprobe';
   if (typeof process.env.FFPROBE_PATH != 'undefined') {
-    ffprobeExec = path.join(process.env.FFPROBE_PATH, ffprobeExec);
+    ffprobeExec = process.env.FFPROBE_PATH;
   }
   const { stdout } = await execa(ffprobeExec, [
     '-print_format', 'json',
